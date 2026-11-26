@@ -31,11 +31,14 @@ export function ChapterSix({lang}: {lang: Language}) {
       <h2 id="security-habits-title"><Emphasis text={habitsTitle} phrase={pick(lang,['grande','big'])} /></h2>
       <table className="habit-table" role="table" aria-labelledby="security-habits-title" data-reveal>
         <thead role="rowgroup">
-          <tr role="row">{columns.map(column=><th key={column} scope="col" role="columnheader">{column}</th>)}</tr>
+          <tr role="row">
+            <th scope="col" role="columnheader">{columns[0]}</th>
+            <th id="habit-reason" scope="col" role="columnheader">{columns[1]}</th>
+          </tr>
         </thead>
         <tbody role="rowgroup">
           {rows.map(([habit,reason],index)=><tr role="row" key={habit}>
-            <th scope="row" role="rowheader">
+            <th id={`habit-${index}`} scope="row" role="rowheader">
               <span className="habit-label">
                 <span className="habit-icon" aria-hidden="true">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65"
@@ -46,7 +49,10 @@ export function ChapterSix({lang}: {lang: Language}) {
                 {habit}
               </span>
             </th>
-            <td role="cell">{reason}</td>
+            <td role="cell" headers={`habit-${index} habit-reason`}>
+              <span aria-hidden="true" className="habit-context">{pick(lang,['Por que isso importa?','Why does it matter?'])}</span>
+              {reason}
+            </td>
           </tr>)}
         </tbody>
       </table>
