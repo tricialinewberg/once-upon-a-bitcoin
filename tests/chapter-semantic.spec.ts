@@ -109,7 +109,7 @@ for (const width of [390,1440]) {
     await page.goto('/chapter/3')
     await page.locator('.comparison').screenshot({path:`${output}/${width}-comparison.png`})
     await page.locator('.chapter-nav').screenshot({path:`${output}/${width}-navigation.png`})
-    await page.locator('.language').getByRole('button',{name:'English',exact:true}).click()
+    await page.locator('.language').getByRole('button',{name:'EN — English',exact:true}).click()
     await expect(page.locator('.lesson-statement')).toContainText('Self-custody means taking control')
   })
 }

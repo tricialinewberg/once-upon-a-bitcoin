@@ -15,7 +15,9 @@
   line-height: 1.07; font-weight: 600; letter-spacing: -.055em; text-wrap: wrap;
 }
 .chapter-head .intro { margin-inline: auto; max-width: 56ch; }
-.chapter-accent { color: var(--chapter-orange); }
+.chapter-accent { color: var(--text-accent-small); }
+:is(h1,h2) > .chapter-accent,.lesson-section > h3 > .chapter-accent { color: var(--text-accent-on-light); }
+:is(.chapter-2,.history-band) .chapter-accent { color: var(--text-accent-on-dark); }
 .chapter-1 .chapter-head { margin-bottom: clamp(.9rem,1.85vw,1.65rem); }
 .chapter-intro { display: grid; align-items: center; gap: 1.15rem; margin-bottom: clamp(3rem,7vw,5.9rem); }
 .chapter-intro > p { width: 100%; font-size: clamp(1.07rem,1.75vw,1.38rem); line-height: 1.67; margin: 0; }

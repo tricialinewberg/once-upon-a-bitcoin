@@ -68,7 +68,7 @@ for (const [width,height] of sizes) {
       await capture('[data-position="converter"]','ii-converter')
       await capture('[data-position="volatility"]','ii-volatility')
       await capture('.learning-panel','ii-learning')
-      await page.locator('.language').getByRole('button',{name:'English',exact:true}).click()
+      await page.locator('.language').getByRole('button',{name:'EN — English',exact:true}).click()
       await expect(page.locator('.results dd')).toHaveText('0.00100000 BTC')
       await expect(page.locator('.learning-panel li')).toHaveCount(5)
       if(width===390) for(let chapter=3;chapter<=7;chapter++) {

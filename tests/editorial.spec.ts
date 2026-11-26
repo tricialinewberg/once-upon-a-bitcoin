@@ -42,7 +42,7 @@ for (const [name,width,height] of [['mobile',390,844],['desktop',1440,900]] as c
       await expect(journey.getByRole('heading',{level:2})).toHaveText('Aprender Bitcoin pode ser mais simples do que você imagina.')
       await expect(journey.locator('.pillars li')).toHaveCount(3)
       await expect(journey.locator('.journey-bitcoin')).toHaveText('Bitcoin')
-      await expect(journey.locator('.journey-bitcoin')).toHaveCSS('color','rgb(247, 147, 26)')
+      await expect(journey.locator('.journey-bitcoin')).toHaveCSS('color','rgb(198, 106, 0)')
       await expect(journey.locator('.intro,.pillar-number')).toHaveCount(0)
       await captureSection(page,journey,`screenshots/correction-03b-${name}-journey.png`)
       const index = journey.locator('.journey-contents')

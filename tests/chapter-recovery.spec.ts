@@ -112,7 +112,7 @@ test('heading entrance and continuous network motion',async ({browser})=>{
     await expect.poll(draws).toBeGreaterThan(offscreen)
     await mkdir(output,{recursive:true})
     await stage.screenshot({path:output+'/live-network.png'})
-    await page.locator('.language').getByRole('button',{name:'English',exact:true}).click()
+    await page.locator('.language').getByRole('button',{name:'EN — English',exact:true}).click()
     await expect(root).toHaveAttribute('data-heading-starts','1')
     await page.goto('/chapter/2')
     await expect(root).toHaveAttribute('data-heading-starts','1')

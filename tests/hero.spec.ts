@@ -62,7 +62,7 @@ test('capture the opening sequence and verify the header in desktop and mobile',
         }
         return orange
       })).toBeGreaterThan(1000)
-      await expect(title.locator('.hero-accent')).toHaveCSS('color','rgb(247, 147, 26)')
+      await expect(title.locator('.hero-accent')).toHaveCSS('color','rgb(198, 106, 0)')
       await expect(primary).toHaveCSS('background-color','rgb(247, 147, 26)')
       await expect(primary).toHaveCSS('color','rgb(32, 32, 32)')
       await expect(primary).toHaveCSS('min-height','54px')
@@ -116,7 +116,7 @@ test('capture the opening sequence and verify the header in desktop and mobile',
         await page.locator('.site-header .logo').tap()
         await expect(page).toHaveURL(/\/$/)
       }
-      await page.locator('.language').getByRole('button',{name:'English',exact:true}).click()
+      await page.locator('.language').getByRole('button',{name:'EN — English',exact:true}).click()
       await expect(title.locator('span')).toHaveText(['Your bitcoin.','Your keys.','Your freedom!'])
       await expect(page.locator('.hero .intro')).toHaveText('Learn what Bitcoin is and how to store and protect it without relying on an exchange.')
       if (touch) await primary.tap()
@@ -138,7 +138,7 @@ test('the complete desktop hero fits above the fold in both languages', async ({
   await expect.poll(() => scene.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0)
   for (const [width,height] of [[1280,720],[1366,768],[1440,900],[1024,768],[768,1024],[390,844],[320,568]]) {
     await page.setViewportSize({width,height})
-    for (const language of ['Português','English']) {
+    for (const language of ['PT — Português','EN — English']) {
       await page.locator('.language').getByRole('button',{name:language,exact:true}).click()
       const measurements = await page.locator('.site-scroll').evaluate((scroller, small) => {
         const viewport = {top:document.querySelector('.site-header')!.getBoundingClientRect().bottom,bottom:innerHeight}

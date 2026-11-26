@@ -62,7 +62,7 @@ for (const [width,height] of widths) {
     await screenshot('.supply','chapter-ii-coin')
     await screenshot('[data-position="converter"]','chapter-ii-converter')
     await screenshot('[data-position="volatility"]','chapter-ii-volatility')
-    await page.locator('.language').getByRole('button',{name:'English',exact:true}).click()
+    await page.locator('.language').getByRole('button',{name:'EN — English',exact:true}).click()
     await expect(notice).toContainText('Keep in mind:')
     await expect(page.getByText('What is HODL?',{exact:true})).toBeVisible()
     await expect(converter.locator('.results dd')).toHaveText('0.00100000 BTC')

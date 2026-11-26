@@ -81,7 +81,7 @@ test('desktop motion and browser recording', async ({page,context},testInfo) => 
   const originalTitle = await title.elementHandle()
   const originalCanvas = await page.locator('.hero-visual canvas').elementHandle()
   const language = page.locator('.language')
-  await language.getByRole('button',{name:'English',exact:true}).click()
+  await language.getByRole('button',{name:'EN — English',exact:true}).click()
   await expect.poll(() => language.evaluate(el => getComputedStyle(el,'::after').transform)).toBe('matrix(1, 0, 0, 1, 44, 0)')
   expect(await title.evaluate((el,original) => el === original,originalTitle)).toBe(true)
   expect(await page.locator('.hero-visual canvas').evaluate((el,original) => el === original,originalCanvas)).toBe(true)

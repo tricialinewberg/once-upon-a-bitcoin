@@ -44,7 +44,7 @@ for (const [width,height] of [[390,844],[768,1024],[1280,720],[1440,900]]) {
     expect(arrows).toEqual([true,false])
     await capture('.chapter-nav','navigation')
     expect(await page.locator('.site-scroll').evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true)
-    await page.locator('.language').getByRole('button',{name:'English',exact:true}).click()
+    await page.locator('.language').getByRole('button',{name:'EN — English',exact:true}).click()
     await expect(page.locator('[data-position="converter"] .volatility-notice')).toContainText('Keep in mind:')
     await expect(section.getByText('What is HODL?',{exact:true})).toBeVisible()
   })

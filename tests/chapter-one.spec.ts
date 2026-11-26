@@ -53,7 +53,7 @@ for (const [width,height] of sizes) {
         }
       }
 
-      await page.locator('.language').getByRole('button',{name:'English',exact:true}).click()
+      await page.locator('.language').getByRole('button',{name:'EN — English',exact:true}).click()
       await expect(title).toHaveText('A new way to look at money')
       await expect(page.getByRole('heading',{name:'How is Bitcoin different from Pix?'})).toBeVisible()
       await page.locator('.chapter-nav .next').click()

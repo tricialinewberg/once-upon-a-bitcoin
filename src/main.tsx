@@ -74,6 +74,22 @@ function App() {
     document.querySelector('meta[property="og:title"]')?.setAttribute('content',document.title)
     document.querySelector('meta[name="description"]')?.setAttribute('content',description)
     document.querySelector('meta[property="og:description"]')?.setAttribute('content',description)
+    const canonical = 'https://once-upon-a-bitcoin.vercel.app' + (active ? chapterPath(current) : '/')
+    let canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link')
+      canonicalLink.rel = 'canonical'
+      document.head.append(canonicalLink)
+    }
+    canonicalLink.href = canonical
+    let shareUrl = document.querySelector<HTMLMetaElement>('meta[property="og:url"]')
+    if (!shareUrl) {
+      shareUrl = document.createElement('meta')
+      shareUrl.setAttribute('property','og:url')
+      document.head.append(shareUrl)
+    }
+    shareUrl.content = canonical
+    document.querySelector('meta[property="og:locale"]')?.setAttribute('content',lang === 'pt' ? 'pt_BR' : 'en_US')
     if (reading.current) {
       const {element,ratio} = reading.current
       const rect = element.getBoundingClientRect()
@@ -276,8 +292,8 @@ function App() {
           </div>
           <Link to={custodyPath} onClick={navigate} className="custody-shortcut">{t(['Autocustódia','Self-custody'])}</Link>
           <div className="language" data-active={lang} role="group" aria-label={t(['Idioma','Language'])}>
-            <button lang="pt-BR" aria-label="Português" aria-pressed={lang === 'pt'} onClick={() => changeLanguage('pt')}>PT</button>
-            <button lang="en" aria-label="English" aria-pressed={lang === 'en'} onClick={() => changeLanguage('en')}>EN</button>
+            <button lang="pt-BR" aria-label="PT — Português" aria-pressed={lang === 'pt'} onClick={() => changeLanguage('pt')}>PT</button>
+            <button lang="en" aria-label="EN — English" aria-pressed={lang === 'en'} onClick={() => changeLanguage('en')}>EN</button>
           </div>
         </nav>
       </div>

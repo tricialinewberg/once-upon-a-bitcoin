@@ -64,7 +64,7 @@ for (const [width,height] of [[360,640],[390,844],[430,932],[768,1024],[1280,720
       await page.evaluate(()=>window.scrollTo(0,0))
       await page.screenshot({fullPage:true,path:`${output}/${width}-chapter-iv.png`})
     }
-    await page.locator('.language').getByRole('button',{name:'English',exact:true}).click()
+    await page.locator('.language').getByRole('button',{name:'EN — English',exact:true}).click()
     await expect(page.getByRole('heading',{name:'Access to your bitcoin.'})).toBeVisible()
     await expect(page.getByText('Treat your wallet as compromised.',{exact:true})).toBeVisible()
     await page.locator('.chapter-nav a[href="/chapter/3"]').click()

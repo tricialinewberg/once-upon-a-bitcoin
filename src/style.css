@@ -11,6 +11,9 @@
     --error-surface: #fff0ed;
     --error-border: #d99b94;
     --action: #a84e08;
+    --text-accent-on-light: #c66a00;
+    --text-accent-on-dark: var(--brand);
+    --text-accent-small: #a84e08;
     --canvas: #f8f5ef;
     --tint: #fff1df;
     --surface: #fff;
@@ -80,7 +83,7 @@
     font-weight: 620; line-height: .99; letter-spacing: -.063em; text-wrap: initial;
   }
   .hero h1 span { display: block; white-space: nowrap; }
-  .hero-accent { color: var(--brand); }
+  .hero-accent { color: var(--text-accent-on-light); }
   .hero-visual { position: relative; width: min(100%,62svh); aspect-ratio: 2.08; margin-block: .2rem; pointer-events: none; }
   .hero-visual img,.hero-visual canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   .hero-visual canvas { visibility: hidden; }
