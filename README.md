@@ -76,6 +76,16 @@ Design decisions were guided by:
 
 The visual identity uses Bitcoin Orange, warm neutral surfaces, charcoal tones, Manrope, and Inter.
 
+## Design System & Documentation
+
+The Design System inventory documents the approved production implementation and provides the foundation for future Figma library construction, Storybook, and developer handoff.
+
+- [Design System overview](docs/design-system/README.md)
+- [Foundations](docs/design-system/foundations.md) and [design tokens](docs/design-system/tokens.json)
+- [Component inventory](docs/design-system/component-inventory.md)
+- [Motion system](docs/design-system/motion.md) and [accessibility](docs/design-system/accessibility.md)
+- [Figma mapping](docs/design-system/figma-mapping.md) and [developer handoff](docs/design-system/handoff-mapping.md)
+
 ## Technology stack
 
 - React
