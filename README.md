@@ -6,6 +6,10 @@ An interactive, bilingual educational experience designed to make Bitcoin and se
 
 **Designed & Developed by Trícia Linewberg**
 
+**[Explore the live experience →](https://once-upon-a-bitcoin.vercel.app/)**
+
+Available in Portuguese (PT-BR) and English (EN).
+
 ## About the project
 
 Learning about Bitcoin can be overwhelming. Technical terminology, complex interfaces, fragmented information, and security concerns often create unnecessary barriers for beginners.
