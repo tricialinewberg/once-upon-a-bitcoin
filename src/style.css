@@ -87,9 +87,8 @@
   .hero-intro-clip { position: absolute; inset: 0; overflow: hidden; visibility: hidden; }
   .hero-intro-clip .hero-intro-atlas { width: 800%; height: 500%; max-width: none; }
   .hero-visual[data-intro-frame] .hero-intro-clip { visibility: visible; }
-  .hero-visual[data-phase]:not([data-intro-frame]) canvas,
-  .hero-visual[data-phase="end"][data-intro-finished] canvas { visibility: visible; }
-  .hero-visual[data-phase="end"][data-intro-finished] .hero-intro-clip { visibility: hidden; }
+  .hero-visual[data-live] canvas { visibility: visible; }
+  .hero-visual[data-live] .hero-intro-clip { visibility: hidden; }
   .hero-copy { display: grid; justify-items: center; gap: .45rem; width: min(100%,43rem); }
   .hero-support { color: var(--muted); font-size: .875rem; line-height: 1.4; text-wrap: pretty; }
   .hero-actions { display: flex; flex-direction: column; justify-content: center; gap: .4rem; align-items: center; margin-top: .25rem; max-width: 100%; }

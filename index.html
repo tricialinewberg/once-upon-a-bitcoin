@@ -11,7 +11,9 @@
   if (location.pathname === '/' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const intro = new Image()
     intro.fetchPriority = 'high'
-    intro.src = '/hero-intro-atlas.webp'
+    intro.src = matchMedia('(min-width: 48rem), (min-width: 375px) and (min-resolution: 2.5dppx)').matches
+      ? '/hero-intro-atlas-480.webp'
+      : '/hero-intro-atlas.webp'
     intro.decode().catch(() => {})
   }
 </script>

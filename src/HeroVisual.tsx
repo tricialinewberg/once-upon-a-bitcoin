@@ -7,6 +7,7 @@ const atlas = '/hero-intro-atlas.webp'
 const columns = 8, rows = 5
 const frameCount = columns*rows
 const duration = 2150
+const frameDuration = duration/frameCount
 const keyframes = Array.from({length:frameCount+1},(_,step) => {
   const index = Math.min(step,frameCount-1)
   return {
@@ -40,7 +41,20 @@ export function HeroVisual({label}: {label:string}) {
 
     setAtlasFailed(false)
     setWebglFailed(false)
-    live = startHero(element,() => {
+    live = startHero(element,frame => {
+      if (element.hasAttribute('data-live')) return
+      if (motion) {
+        if (!frame.synced) return
+        const current = Number(motion.currentTime)
+        // The export samples each tile at the end of its interval.
+        const tileTime = Math.min(duration,(Math.floor(current/frameDuration)+1)*frameDuration)
+        if (!(current >= duration && frame.opening === 1) && Math.abs(frame.time-tileTime) > frameDuration) return
+      }
+      element.dataset.live = ''
+      cancelAnimationFrame(sample)
+      motion?.cancel()
+    },() => {
+      if (element.hasAttribute('data-live')) setAtlasFailed(true)
       live?.stop()
       live = undefined
       setWebglFailed(true)
@@ -48,10 +62,12 @@ export function HeroVisual({label}: {label:string}) {
 
     if (image) {
       void image.decode().then(() => {
-        if (!active || element.hasAttribute('data-phase')) return
+        if (!active || element.hasAttribute('data-live')) return
         motion = image.animate(keyframes,{duration,fill:'forwards'})
+        const started = Number(document.timeline.currentTime ?? performance.now())
+        motion.startTime = started
         element.dataset.introFrame = '0'
-        live?.syncIntro(performance.now())
+        live?.syncIntro(started)
         function markMovement() {
           if (Number(motion?.currentTime) >= duration/frameCount) element.dataset.introFrame = '1'
           else sample = requestAnimationFrame(markMovement)
@@ -68,6 +84,7 @@ export function HeroVisual({label}: {label:string}) {
       cancelAnimationFrame(sample)
       motion?.cancel()
       live?.stop()
+      delete element.dataset.live
       delete element.dataset.introFrame
       delete element.dataset.introFinished
     }
@@ -77,7 +94,10 @@ export function HeroVisual({label}: {label:string}) {
   return <div className="hero-visual" ref={host} role="img" aria-label={label} data-fallback={staticFallback ? '' : undefined}>
     {staticFallback && <img src={settledStill} fetchPriority="high" width="1344" height="646" alt="" />}
     {!reduced && !atlasFailed && <div className="hero-intro-clip" aria-hidden="true">
-      <img className="hero-intro-atlas" ref={sprite} src={atlas} fetchPriority="high" width="2560" height="770" alt="" />
+      <picture>
+        <source media="(min-width: 48rem), (min-width: 375px) and (min-resolution: 2.5dppx)" srcSet="/hero-intro-atlas-480.webp" />
+        <img className="hero-intro-atlas" ref={sprite} src={atlas} fetchPriority="high" width="2560" height="770" alt="" />
+      </picture>
     </div>}
   </div>
 }

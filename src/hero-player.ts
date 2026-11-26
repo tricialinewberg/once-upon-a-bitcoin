@@ -35,7 +35,7 @@ export function preloadHero() {
   }
 }
 
-export function startHero(host: HTMLDivElement, onFailure: () => void) {
+export function startHero(host: HTMLDivElement, onReadyFrame: (frame: HeroFrame) => void, onFailure: () => void) {
   const touch = matchMedia('(pointer: coarse)').matches
   const pixelRatio = Math.min(devicePixelRatio,touch ? 1.5 : 2)
   let canvas: HTMLCanvasElement
@@ -50,13 +50,15 @@ export function startHero(host: HTMLDivElement, onFailure: () => void) {
     return canvas
   }
 
-  function report({opening,reveal}: HeroFrame) {
+  function report(frame: HeroFrame) {
     if (!active) return
+    const {opening,reveal} = frame
     if (!host.dataset.phase) host.dataset.phase = 'opening'
     if (opening === 1 && host.dataset.phase !== 'end') host.dataset.phase = 'end'
     const progress = opening.toFixed(4)
     if (host.dataset.opening !== progress) host.dataset.opening = progress
     if (reveal > 0 && !host.hasAttribute('data-coin-rising')) host.dataset.coinRising = ''
+    onReadyFrame(frame)
   }
 
   function size() {

@@ -1,6 +1,6 @@
 import { createHeroScene } from './hero-scene'
 
-export type HeroFrame = {opening: number; reveal: number}
+export type HeroFrame = {opening: number; reveal: number; time: number; synced: boolean}
 export type HeroDriver = {
   resize(width: number, height: number): void
   setVisible(visible: boolean): void
@@ -33,7 +33,7 @@ export function runHero(
     try {
       if (!touch || elapsed < 2.30 || now-lastDraw >= 1000/30-1) {
         const progress = scene.draw(elapsed)
-        if (!settled) onFrame(progress)
+        if (!settled) onFrame({...progress,time:elapsed*1000,synced:introStartedAt !== undefined})
         settled = elapsed >= 2.30
         lastDraw = now
         if (!rendered) {

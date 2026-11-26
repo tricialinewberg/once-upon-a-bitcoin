@@ -2,14 +2,15 @@ import { test } from '@playwright/test'
 import { writeFile } from 'node:fs/promises'
 
 test('render the hero opening atlas from the approved scene',async ({page}) => {
-  test.skip(process.env.BUILD_HERO_ATLAS !== '1','Run only when the hero motion asset needs regeneration')
+  const dense = process.env.BUILD_HERO_ATLAS === '480'
+  test.skip(process.env.BUILD_HERO_ATLAS !== '1' && !dense,'Run only when the hero motion asset needs regeneration')
   test.setTimeout(300000)
   await page.goto('/chapter/1',{waitUntil:'domcontentloaded'})
-  const data = await page.evaluate(async () => {
+  const data = await page.evaluate(async ({width,height,quality}) => {
     const modulePath = '/src/hero-scene.ts'
     const {createHeroScene} = await import(modulePath)
     const canvas = document.createElement('canvas')
-    const width = 320, height = 154, columns = 8, rows = 5
+    const columns = 8, rows = 5
     const atlas = document.createElement('canvas')
     atlas.width = width*columns
     atlas.height = height*rows
@@ -21,9 +22,10 @@ test('render the hero opening atlas from the approved scene',async ({page}) => {
       scene.draw(time)
       context.drawImage(canvas,(frame%columns)*width,Math.floor(frame/columns)*height)
     }
-    const data = atlas.toDataURL('image/webp',.76)
+    const data = atlas.toDataURL('image/webp',quality)
     scene.dispose()
     return data
-  })
-  await writeFile('public/hero-intro-atlas.webp',Buffer.from(data.split(',')[1],'base64'))
+  },dense ? {width:480,height:231,quality:.8} : {width:320,height:154,quality:.76})
+  const path = dense ? 'public/hero-intro-atlas-480.webp' : 'public/hero-intro-atlas.webp'
+  await writeFile(path,Buffer.from(data.split(',')[1],'base64'))
 })

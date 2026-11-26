@@ -73,10 +73,10 @@ for (const mobile of [false,true]) {
             if (host.dataset.introFrame === '1' || (!host.dataset.introFrame && Number(host.dataset.opening) >= .002)) mark('first-book-movement')
             if (host.dataset.introFinished !== undefined) mark('atlas-ended')
             if (host.dataset.phase) mark('live-rendered')
-            if (host.dataset.phase === 'end' && (host.dataset.introFrame === undefined || host.dataset.introFinished !== undefined)) mark('live-visible')
+            if (host.hasAttribute('data-live')) mark('live-visible')
           }
         })
-        observer.observe(document,{subtree:true,attributes:true,attributeFilter:['data-intro-frame','data-intro-finished','data-phase','data-opening']})
+        observer.observe(document,{subtree:true,attributes:true,attributeFilter:['data-intro-frame','data-live','data-phase','data-opening']})
       })
       if (capture) await mkdir('screenshots',{recursive:true})
       const frames: {data:string; time:number}[] = []

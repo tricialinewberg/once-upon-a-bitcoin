@@ -59,6 +59,7 @@ export function mount(host: HTMLDivElement, kind: SceneKind, initial: SceneState
   const shadow = contactShadow(peer ? 4.8 : 3.4)
   if (shadow) {
     shadow.position.y = peer ? -.06 : -1.06
+    if (peer) shadow.material.opacity = .42
     scene.add(shadow)
   }
   let flow: ((time: number) => void) | undefined
